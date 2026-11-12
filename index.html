@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══ Header & Balance ══════════════════════════════════════════ -->
+<header>
+  <div class="header-top">
+    <div>
+      <h1>💸 Expense Tracker</h1>
+      <p id="hdr-date"></p>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+  </div>
+
+  <div class="balance-card">
+    <div class="label">Total Spent</div>
+    <div id="balance-display">$0.00</div>
+    <div class="balance-row">
+      <div class="mini">
+        <div class="m-label">📋 Total</div>
+        <div class="m-val inc" id="total-spend">$0.00</div>
+      </div>
+      <div class="mini">
+        <div class="m-label">🔢 Count</div>
+        <div class="m-val exp" id="tx-count">0 items</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══ Add Transaction ═══════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">Add Transaction</div>
+    <form id="tx-form">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Item Name</label>
+          <input id="f-name" type="text" placeholder="e.g. Coffee, Bus fare…" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="f-amount">Amount ($)</label>
+          <input id="f-amount" type="number" placeholder="0.00" min="0.01" step="0.01">
+        </div>
+      </div>
+
+      <label style="font-size:0.78rem;color:var(--muted);font-weight:500;display:block;margin-bottom:6px;">Category</label>
+      <div class="cat-tags" id="cat-tags"></div>
+
+      <div class="custom-cat-row">
+        <input id="new-cat-input" type="text" placeholder="Add custom category…" maxlength="20">
+        <button id="btn-add-cat" type="button" class="btn-sm">+ Add</button>
+      </div>
+
+      <button class="submit-btn" type="submit">+ Add Transaction</button>
+    </form>
+  </div>
+
+  <!-- ══ Spending Limit ════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">⚠️ Spending Limit Alert</div>
+    <div class="limit-row">
+      <label for="limit-input">Warn when a single item exceeds</label>
+      <input id="limit-input" type="number" placeholder="e.g. 50" min="0" step="1">
+    </div>
+    <p style="font-size:0.75rem;color:var(--muted);">Items over the limit are highlighted in the list.</p>
+  </div>
+
+  <!-- ══ Pie Chart ═════════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">Spending by Category</div>
+    <div id="chart-wrap">
+      <div class="chart-container">
+        <canvas id="chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Monthly Summary ═══════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">Monthly Summary</div>
+    <div class="month-tabs" id="month-tabs"></div>
+    <div class="summary-grid" id="summary-grid"></div>
+  </div>
+
+  <!-- ══ Transaction List ══════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">Transactions</div>
+    <div class="sort-row">
+      <span>Sort:</span>
+      <button class="sort-btn active" data-sort="date">By Date</button>
+      <button class="sort-btn" data-sort="amount">By Amount</button>
+      <button class="sort-btn" data-sort="category">By Category</button>
+    </div>
+    <div class="tx-list-wrap">
+      <div id="tx-list"></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
